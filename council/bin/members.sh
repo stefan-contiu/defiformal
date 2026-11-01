@@ -1,175 +1,63 @@
 #!/usr/bin/env bash
-# The verified invocation table. Each entry was confirmed (or, where noted,
-# blocked) by council/bin/smoke-members.sh, not taken from documentation.
+# Council member invocation table. Each lens runs one platform CLI directly,
+# headless, from its own sandbox directory, with stdin closed and an outer
+# `timeout`. The recipes and model pins follow the codex, grok, agy and
+# claude skills in ~/workflowskills/skills. council/bin/smoke-members.sh
+# checks each entry with one small real call.
 #
-# foreman-launch nulls the child's stdin, so `codex exec -` (stdin form)
-# cannot be used here. Every prompt is positional and names a file the
-# member reads from its own sandbox.
-FL="$HOME/foreman/skills/foreman/runtime/dist/foreman-launch.js"
+#   empirical    grok   grok-4.7
+#   formal       claude claude-opus-5-5, effort medium
+#   significance codex  gpt-6.1-sol, read-only sandbox
+#   reproducer   agy    gemini-4-argon-high, shell and writes denied
+#   decider      claude claude-opus-5-5, effort medium
+#
+# Every prompt is short and positional (or a prompt file for grok). It names
+# the brief the member reads from its own sandbox.
 TIMEOUT="${COUNCIL_TIMEOUT:-900}"
 
-_launch () {  # $1=outjson $2=outlog ; rest = command
+# Run a command with stdin closed and a hard outer timeout. Exit 124 means
+# the timeout stopped it.
+_launch () {  # $1=outfile (stdout) $2=outlog (stderr) ; rest = command
   local out="$1" log="$2"; shift 2
-  node "$FL" --timeout "$TIMEOUT" -- "$@" >"$out" 2>"$log"
-}
-
-# opencode's default ("formatted") run output renders nothing to stdout
-# outside a real TTY -- only `--format json` gives a programmatic stream,
-# and that stream is NDJSON protocol *events*, not the member's plain-text
-# answer. `--format json` is therefore load-bearing, not a nicer output
-# mode: it is the only invocation that produces anything on stdout at all
-# when there's no TTY. This pulls out and concatenates every
-# `{"type":"text",...}` event's `part.text`, which is opencode's
-# equivalent of "what the other CLIs already put on stdout for free".
-# This unwraps a documented, structured transport to reach the model's
-# actual final answer -- it does not clean up the answer's content, which
-# stays members.sh's business to leave alone (see extract-json.py).
-_unwrap_opencode_text () {  # $1=raw ndjson $2=out
-  python3 -c '
-import json, sys
-raw, out = sys.argv[1], sys.argv[2]
-chunks = []
-try:
-    with open(raw, "r", encoding="utf-8", errors="replace") as f:
-        for line in f:
-            line = line.strip()
-            if not line:
-                continue
-            try:
-                ev = json.loads(line)
-            except ValueError:
-                continue
-            if ev.get("type") == "text":
-                t = ev.get("part", {}).get("text")
-                if t:
-                    chunks.append(t)
-except FileNotFoundError:
-    pass
-with open(out, "w", encoding="utf-8") as f:
-    f.write("".join(chunks))
-' "$1" "$2"
+  timeout -k 10 "$TIMEOUT" "$@" >"$out" 2>"$log" </dev/null
 }
 
 run_member () {  # $1=lens $2=sandbox $3=brief $4=outjson $5=outlog
   local lens="$1" sb="$2" brief="$3" out="$4" log="$5"
-  # "Do not read any file outside this directory", not the earlier "do
-  # not read any other file": Task 6 dispatches real briefs that must
-  # read a second file (the bundle under review), and a prompt forbidding
-  # a second read is a refusal waiting to happen. The constraint that
-  # actually matters is sandbox containment, not single-file reading.
+  # The member may read the bundle beside the brief, so the prompt forbids
+  # reads outside the sandbox, not a second read.
   local ask="Read ./$(basename "$brief") in full and follow it exactly. Do not read any file outside this directory. Output only the JSON object it specifies: no narration of what you are about to do or did, no markdown fences, nothing before or after the JSON."
   ( cd "$sb" || exit 125
     case "$lens" in
-      # grok 1.0.5: `--prompt-file` (single-turn prompt read from a file)
-      # used instead of `--single "$ask"` even though today's $ask is
-      # small -- it sidesteps grok's documented argv-truncation trap for
-      # good, so a future larger ask can't silently reintroduce it.
-      # `--always-approve` is load-bearing: without it, grok's Read tool
-      # call for ./brief.md sits waiting on a permission prompt that
-      # foreman-launch's nulled stdin can never answer, and the run times
-      # out (exit 124) instead of completing. `--max-turns 10` bounds a
-      # read+compose task that needs only a couple of turns.
-      #
-      # TRIED AND REJECTED: `--json-schema` (constrained decoding, implies
-      # --output-format json). It does defeat the narration prefix -- but
-      # by skipping the read entirely. Against the real smoke fixture it
-      # returned in a single turn (`"num_turns": 1`, no tool_use event)
-      # with content totally unrelated to the actual brief/bundle:
-      #   {"lens":"ux","verdict":"pass","summary":"No blocking UX issues.
-      #   Primary actions are labeled, empty and error states are
-      #   present, and the layout stays usable on a narrow viewport."}
-      # -- fabricated, schema-shaped, and never grounded in ./brief.md or
-      # ./bundle.md, whose actual subject (a 3-element vocabulary and a
-      # redundancy claim) appears nowhere in it. Constrained output and
-      # the tool call this interface requires are mutually exclusive in
-      # this grok version: real finding, not a config error on our side.
-      # (The response DID also carry a clean top-level "structuredOutput"
-      # object alongside the noisy "text" field -- so if a future grok
-      # version makes --json-schema tool-call-aware, unwrapping that
-      # field would be the right fix; not applicable today.)
-      #
-      # Still open: grok's plain-mode stdout remains narration-prefixed
-      # (a lead-in sentence before the JSON) on every read-then-answer
-      # call -- four separate invocation attempts, including a full
-      # --system-prompt-override, could not suppress it (see git history
-      # for the earlier round's detail). That is now handled uniformly by
-      # extract-json.py at the validation layer, not papered over here.
+      # grok: a prompt file avoids argv truncation. --always-approve stops
+      # the Read tool from waiting on a prompt that closed stdin cannot
+      # answer. Plain output can carry a narration lead-in before the JSON;
+      # extract-json.py handles that at the validation layer.
       empirical)
         local promptfile="$sb/.grok-prompt.txt"
         printf '%s' "$ask" > "$promptfile"
-        _launch "$out" "$log" grok --prompt-file "$promptfile" -m grok-4.6 --effort high --always-approve --max-turns 10
+        _launch "$out" "$log" grok -m grok-4.7 --reasoning-effort high \
+          --prompt-file "$promptfile" --cwd "$sb" --always-approve \
+          --no-subagents --disable-web-search --no-auto-update --max-turns 10
         ;;
-      # claude 2.1.233: brief's guess is syntactically correct and
-      # unchanged. `-p`/`--print` is a boolean flag (prompt is positional,
-      # not its value); Read is an always-allowed tool in print mode so no
-      # permission-mode flag is needed for a read-only task. `--model
-      # claude-opus-5` is a valid full model name (same generation-5 naming
-      # as claude-fable-5, which `claude --help` gives as its own example).
-      #
-      # BLOCKED, not an invocation problem, and left exactly as written
-      # per instruction. Correction to the original characterisation:
-      # this is NOT "never logged in". `~/.claude/.credentials.json`
-      # exists (Max subscription, full scopes) -- the credentials are
-      # present. But its `expiresAt` is 0 and the token refresh fails,
-      # which is why `claude auth status` still reports `{"loggedIn":
-      # false, "authMethod": "none"}` and a direct call (bypassing
-      # foreman-launch entirely) returns "Failed to authenticate: OAuth
-      # session expired and could not be refreshed" (exit 0). The
-      # accurate statement is "credentials present but the OAuth session
-      # is expired and unrefreshable", not "never logged in" -- that
-      # points at Charles re-authenticating (`claude auth login` or
-      # `claude setup-token`) to refresh the existing session, not at
-      # setting up a fresh one. No ANTHROPIC_API_KEY, no
-      # CLAUDE_CONFIG_DIR, and no foreman-specific claude credential
-      # profile (unlike grok's GROK_HOME) were found on PATH or in
-      # foreman-launch.js as an alternate route. Already surfaced to
-      # Charles; not an agent-fixable problem.
-      formal)       _launch "$out" "$log" claude -p --model claude-opus-5 "$ask" ;;
-      # codex-cli 0.149.0: brief's guess ran unchanged, first try, no
-      # corrections needed. `codex exec` (the non-interactive subcommand,
-      # distinct from bare `codex`) takes the prompt positionally and does
-      # not stop for shell/file-read approval in this sandbox. `--skip-git-
-      # repo-check` is required because the sandbox is a plain mktemp -d,
-      # not a git repo, and codex exec refuses to start outside one
-      # otherwise. VERIFIED end-to-end: returned a clean, contract-shaped
-      # JSON object with a "verdict" key on the first live call.
-      significance) _launch "$out" "$log" codex exec --skip-git-repo-check "$ask" ;;
-      # gemini -- BLOCKED, dropped: no auth method configured on this
-      # box, and every invocation (even a direct call from a fresh,
-      # unrelated mktemp -d, outside foreman-launch) crashes in gemini's
-      # own checkpoint cleanup on a pre-existing ~/.gemini/projects.json
-      # slug collision. Neither ours to patch.
-      #
-      # agy (Antigravity) was considered as the replacement and dropped:
-      # never actually run through this table, and a direct probe of it
-      # hung for seventeen minutes with no output -- versus opencode
-      # below, which has two reproduced live successes.
-      #
-      # opencode 0.52.0 (opencode/big-pickle, its zero-config free model):
-      # `opencode run "$ask" --format json --auto` is VERIFIED end-to-end
-      # against the real smoke fixture, TWICE, reproduced identically
-      # both times -- it read ./brief.md via a real tool call and
-      # returned a clean final answer with no narration prefix at all
-      # (extraction was not necessary for opencode in either run).
-      # `--auto` (auto-approve permissions not explicitly denied) was
-      # added pre-emptively for the same class of trap hit with grok's
-      # --always-approve and gemini's --skip-trust: a permission/trust
-      # prompt that nulled stdin can never answer. Raw stdout is NDJSON
-      # protocol events, not the answer text, hence
-      # `_unwrap_opencode_text` above.
+      # claude: print mode allows Read without a permission flag.
+      formal|decider)
+        _launch "$out" "$log" claude -p --model claude-opus-5-5 --effort medium "$ask"
+        ;;
+      # codex: read-only sandbox, no session file, and the sandbox is not a
+      # git repo. -o writes only the final message; progress goes to the log.
+      significance)
+        timeout -k 10 "$TIMEOUT" codex exec -m gpt-6.1-sol -c model_reasoning_effort=high \
+          -s read-only --ephemeral --skip-git-repo-check -C "$sb" -o "$out" \
+          "$ask" >"$log" 2>&1 </dev/null
+        ;;
+      # agy: headless agy can run shell commands and write files unless a
+      # deny rule is passed per run. Reads inside the workspace stay allowed.
       reproducer)
-        local raw="$sb/.opencode-events.jsonl"
-        _launch "$raw" "$log" opencode run "$ask" --format json --auto
-        local rc=$?
-        _unwrap_opencode_text "$raw" "$out"
-        exit "$rc"
+        _launch "$out" "$log" agy --model gemini-4-argon-high --disable-slash-commands \
+          --settings '{"permissions":{"deny":["command(*)","write_file(*)","execute_url(*)","mcp(*)"]}}' \
+          --print-timeout "${TIMEOUT}s" --print="$ask"
         ;;
-      # Not exercised by the Task 1 smoke test (only used starting in Task
-      # 7's decider round) but defined here per the brief's interface so
-      # dispatch.sh (Task 6) and Task 7 have a working `decider` case.
-      # Mirrors the `formal` lens's flags with the fable model, and hits
-      # the identical claude-auth blocker documented above.
-      decider)      _launch "$out" "$log" claude -p --model claude-fable-5 "$ask" ;;
       *) echo "unknown lens: $lens" >&2; exit 125 ;;
     esac )
 }

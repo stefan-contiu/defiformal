@@ -1,13 +1,11 @@
 #!/usr/bin/env bash
-# Each CLI must return, through foreman-launch, from an empty sandbox with
-# stdin nulled, stdout that contains a balanced JSON object with a
-# "verdict" key -- extracted via council/bin/extract-json.py rather than
-# requiring bare stdout to already be valid JSON on its own, since a
-# member can narrate its next tool call inline with its final answer (see
-# members.sh's empirical/grok case) without that being a dispatch failure.
-# Extraction papering over a member that returned no JSON at all is not
-# acceptable either: extract-json.py fails closed when no balanced object
-# exists, so that case still fails this check.
+# One small real call per platform CLI. Each member runs from an empty
+# sandbox with stdin closed and must return stdout that contains a balanced
+# JSON object with a "verdict" key. council/bin/extract-json.py extracts it,
+# because a member can narrate before its final answer (see members.sh,
+# empirical lens). extract-json.py fails closed when no balanced object
+# exists, so a member that returns no JSON still fails this check.
+# COUNCIL_TIMEOUT bounds each call (default 900 s).
 set -uo pipefail
 # Resolved from this file's own location; DEFIFORMAL_ROOT overrides and
 # says so -- mirrors the formal/v3/*.py pattern (e.g. verify-structure.py)
@@ -19,6 +17,7 @@ if [ "$_REPO" != "$_SELF" ]; then
   echo "smoke-members.sh: NOTE - reading $_REPO (DEFIFORMAL_ROOT), not $_SELF" >&2
 fi
 cd "$_REPO" || exit 3
+export PATH="$HOME/.local/bin:$HOME/.npm-global/bin:$PATH"
 [ -f council/bin/members.sh ] || { echo "members.sh absent"; exit 3; }
 . council/bin/members.sh
 

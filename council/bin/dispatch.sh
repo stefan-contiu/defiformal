@@ -1,34 +1,13 @@
 #!/usr/bin/env bash
 # One sandboxed member per lens. Each gets an empty directory containing only
 # the bundle and its own brief, so "do not read any other file" is enforced by
-# the filesystem rather than by asking politely.
-#
-# CLI map corrected against council/bin/members.sh (the load-bearing source
-# of truth, confirmed by Task 1's smoke tests) rather than against the
-# original task-6-brief.md, which was extracted before Task 1 ran:
-#   - reproducer runs opencode, not gemini. gemini has no auth configured on
-#     this box and crashes on startup on a pre-existing ~/.gemini/projects.json
-#     collision; members.sh already dispatches opencode for this lens.
-#   - formal (claude) is dispatched anyway, on the same path as every other
-#     lens, so its failure is recorded honestly rather than silently skipped.
-#     `claude auth status` reports loggedIn:false -- credentials are present
-#     (Max subscription) but the OAuth session is expired and unrefreshable,
-#     which only Charles can fix. It is expected to fail and must not be
-#     re-dispatched or substituted.
+# the filesystem rather than by asking politely. council/bin/members.sh is
+# the source of truth for which platform CLI and model each lens uses.
 set -uo pipefail
 
-# This script is invoked as `bash council/bin/dispatch.sh`, not as a login
-# shell, so ~/.bashrc / ~/.profile are never sourced and PATH lacks every
-# user-local install dir. Observed 2026-08-23: under the bare PATH inherited
-# from a non-login `bash script.sh` invocation, `codex` still resolved (it
-# happens to also live on /usr/local/bin) but grok, claude and opencode all
-# failed with "launcher error: spawn <cli> ENOENT" -- node's child_process
-# spawn never found the binary, so no vendor call was made and no cost was
-# incurred, but three of four lenses silently never ran. Hardening PATH here,
-# rather than depending on the caller's shell, keeps this script correct
-# under any invocation (cron, another agent, a plain `bash` call) including
-# Task 7's reuse of it for the decider round.
-export PATH="$HOME/.local/bin:$HOME/.opencode/bin:$HOME/.npm-global/bin:$HOME/.grok/bin:$PATH"
+# Invoked as `bash council/bin/dispatch.sh`, so no login profile is sourced
+# and PATH can lack the user-local install directories. Set them here.
+export PATH="$HOME/.local/bin:$HOME/.npm-global/bin:$PATH"
 
 cd "$(dirname "$0")/../.." || exit 3
 REPO="$(pwd)"
@@ -37,7 +16,7 @@ REPO="$(pwd)"
 # run_member (members.sh) executes its whole case statement inside a
 # `( cd "$sb" ... )` subshell -- the sandbox directory, not this script's
 # cwd. Any relative path handed in as outjson/outlog therefore resolves
-# against the sandbox, not the repo, and the redirect in _launch fails
+# against the sandbox, not the repo, and the output redirect fails
 # before the vendor CLI is ever invoked. OUT and the copied brief source
 # must be absolute for that reason.
 ROUND="${1:-1}"
@@ -55,7 +34,7 @@ B="$REPO/council/sprint1/BUNDLE-blinded.md"
 python3 council/bin/leak-check.py "$B" >/dev/null 2>&1 \
   || { echo "dispatch: BLOCKED - bundle failed the leak check"; exit 3; }
 
-declare -A CLI=( [empirical]=grok [formal]=claude [significance]=codex [reproducer]=opencode )
+declare -A CLI=( [empirical]=grok [formal]=claude [significance]=codex [reproducer]=agy )
 
 for lens in $LENSES; do
   SB=$(mktemp -d)
