@@ -54,7 +54,7 @@ The sprint SHALL retain automatic imported theorem and supplemental declaration 
 
 ### Requirement: Planning implementation and delivery gates
 
-Implementation SHALL begin only after independent GPT-6 and native Fable planning reviews pass on the same frozen candidate and a current baseline passes. Substantive results SHALL receive native Grok and Fable reviews with exact requested/reported models, source identity, findings and fixes. An unavailable or incomplete review SHALL remain open. Stock Codex SHALL implement using GPT-6 without Foreman. Wiki notes SHALL record decision summaries and links without presenting plans as proved results. Archive SHALL require all tasks and acceptance gates complete.
+Implementation SHALL begin only after independent GPT-6 and native Fable planning reviews pass on the same frozen candidate and a current baseline passes. Substantive results SHALL receive native Grok and Fable reviews with exact requested/reported models, source identity, findings and fixes. An unavailable or incomplete review SHALL remain open. Stock Codex SHALL implement using GPT-6. Wiki notes SHALL record decision summaries and links without presenting plans as proved results. Archive SHALL require all tasks and acceptance gates complete.
 
 #### Scenario: Planning gate
 

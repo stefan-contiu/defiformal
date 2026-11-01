@@ -27,7 +27,7 @@ Implementation waits for the same frozen S10 candidate to receive nonauthor stoc
 GPT-6 and native Fable5.1 medium planning acceptance. Request
 `claude-fable-5-1[1m]` with `--effort medium`, recording the actual returned model.
 Substantive implementation/evidence reviews use native Grok and Fable5.1 medium.
-Stock GPT-6 implements through the Codex harness. No Foreman.
+Stock GPT-6 implements through the Codex harness.
 
 ## Mathematical and runtime scope
 

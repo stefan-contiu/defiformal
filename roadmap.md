@@ -283,7 +283,7 @@ runtime labels, 1,459 imported theorems and 1,131 supplemental rows. Source/evid
 GPT-6 implements through the stock Codex harness. Lean is the mathematical
 authority. Use meaningful negative and mutation checks, independent native Grok
 and Fable review, saved evidence bound to exact source/tool identities, and a
-verified branch push. Do not use Foreman. Preserve prior proofs, negative results,
+verified branch push. Preserve prior proofs, negative results,
 and corpus source identities. Keep proofs, bounded execution, measurements,
 refutations, and unchecked assumptions distinct.
 
@@ -293,6 +293,6 @@ gates use Grok plus Fable. Completed Opus and historical Fable reports retain
 their original model identities. See [working instructions](AGENTS.md).
 
 Current implementation assignment (2026-09-08) for remaining program work:
-native Grok 4.6 authors; independent GPT-6 checks; no Foreman. Historical
+native Grok 4.6 authors; independent GPT-6 checks. Historical
 Grok/Fable and GPT-6-author records above retain their original identities.
 This section does not relabel completed reviews.

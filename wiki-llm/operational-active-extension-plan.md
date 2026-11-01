@@ -43,6 +43,6 @@ separate negative companions. These are planned controls, not reported passes.
 The draft author cannot be its nonauthor planning reviewer. GPT-6 stock-harness
 implementation requires refreshed same-candidate nonauthor GPT-6/native Fable5.1
 medium planning review, then native Grok/Fable result review and scoped delivery.
-No Foreman, native invocation, implementation, commit or change to held inputs
+No native invocation, implementation, commit or change to held inputs
 occurred in this preparation. Dynamic provenance, Atomic extension, corpus facts,
 untouched evaluation and deployed fidelity remain separate obligations.

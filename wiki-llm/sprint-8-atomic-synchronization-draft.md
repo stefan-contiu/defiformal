@@ -4,7 +4,7 @@
 > not an approved implementation plan. Use the existing stock GPT-6 harness and
 > applicable executing-plans workflow only after the frozen GPT-6/Fable planning
 > gate passes. Native Grok/Fable result audits and exact source binding remain
-> required. Do not use Foreman.
+> required.
 
 **Goal:** Execute named finite multi-component events with all-or-nothing public
 commit, exact rollback on failure, and a checked transient settlement discipline

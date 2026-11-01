@@ -52,7 +52,7 @@ axioms, or native decision axioms.
 ### Requirement: Independent review and source-bound delivery
 The system SHALL retain GPT-6 implementation through the stock harness and native
 Grok and Fable review of the actual candidate, with findings, fixes, limitations,
-and exact source/tool identities saved. It SHALL NOT use Foreman. Planning
+and exact source/tool identities saved. Planning
 completion SHALL be distinguished from implementation acceptance.
 
 #### Scenario: Candidate changes after review

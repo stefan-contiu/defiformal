@@ -35,5 +35,5 @@ not reports of new execution or changes to the accepted Atomic implementation.
 The draft author cannot serve as its nonauthor reviewer. No implementation,
 Lean build, mutation run, native invocation, source edit or commit was performed.
 GPT-6 stock-harness implementation and native Grok/Fable5.1 medium result reviews
-remain future gates; no Foreman. Dynamic capability provenance, general new-lane
+remain future gates. Dynamic capability provenance, general new-lane
 interaction, nested boundaries and deployed fidelity remain separate work.

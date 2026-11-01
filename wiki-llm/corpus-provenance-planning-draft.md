@@ -15,7 +15,7 @@
 > no replacement is selected. See the [current decision](corpus-provenance-adjudication.md)
 > and [refresh-03 author evidence](../review/semantic-kernel/corpus-provenance-adjudication/planning/refresh-03/REPORT.md).
 
-Status: bounded design inputs, 2026-09-07 UTC. This document proposes a later OpenSpec change; it does not adjudicate annotations, certify deployments, acquire holdouts, or change corpus outputs. Prepared through the stock GPT-6 Codex harness. No Foreman or reviewer approval is implied.
+Status: bounded design inputs, 2026-09-07 UTC. This document proposes a later OpenSpec change; it does not adjudicate annotations, certify deployments, acquire holdouts, or change corpus outputs. Prepared through the stock GPT-6 Codex harness. No reviewer approval is implied.
 
 The recommended next step is an append-only, source-backed adjudication layer for the existing development corpus. Preserve raw annotations, mechanical agreement records, unresolved provenance, and historical source bytes. Start with the 29 observed differences and the separate Liquity V1 challenge. A reviewed unresolved outcome is valid when the evidence cannot determine a label.
 

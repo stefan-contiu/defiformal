@@ -4,7 +4,7 @@ Author draft only. Use `superpowers:executing-plans` after the same-candidate in
 
 **Goal:** Actual fixed-principal claim lifecycle with atomic ledger-backed funding and repayment.
 **Architecture:** Separate augmented state and checked command executor; actual Composition invocation results feed exact payment checks before one publication; generic reachability proves lifecycle invariants.
-**Tech stack:** Accepted pinned Lean/mathlib, Python3 production evidence tooling, OpenSpec. All Lean commands run from `lean/` with its pinned toolchain. Preserve legacy World/Right/modules/statements and runtime import discipline. No Foreman, sorry, custom axiom or native_decide.
+**Tech stack:** Accepted pinned Lean/mathlib, Python3 production evidence tooling, OpenSpec. All Lean commands run from `lean/` with its pinned toolchain. Preserve legacy World/Right/modules/statements and runtime import discipline. No sorry, custom axiom or native_decide.
 
 ## 1. Freeze and baseline
 

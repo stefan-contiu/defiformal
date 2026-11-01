@@ -9,7 +9,7 @@ dissent will be preserved verbatim rather than averaged away** — so state it.
 
 ## 0. Council contract
 
-Adapted from the Foreman Council operator contract:
+Adapted from the Council operator contract (now the council skill):
 
 - **Independent proposals.** You are proposing blind to your colleagues. Do not
   hedge toward an imagined middle; propose what you actually think is right.

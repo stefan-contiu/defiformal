@@ -52,7 +52,7 @@
 
 Each task includes its own verification above. All boxes remain unchecked because
 this is a proposed later package. Implement with the executing-plans skill after
-the planning gate; use stock GPT-6 and independent native reviews, never Foreman.
+the planning gate; use stock GPT-6 and independent native reviews.
 No native invocation, implementation, commit, push or archive is performed by
 this planning authoring task.
 

@@ -58,7 +58,7 @@ not a criticism of the protocol, and the open term must be named in the paper.
 
 ---
 
-## STAGE 4 — formalism improvements (orchestrator + `foreman-plan` agents)
+## STAGE 4 — formalism improvements (orchestrator + planning subagents run by the lead agent)
 
 Collect the residue across all 60 constructions. Group it. For each group,
 state: what the vocabulary cannot express; whether the repair is a new element,

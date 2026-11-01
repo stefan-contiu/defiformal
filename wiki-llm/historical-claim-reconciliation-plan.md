@@ -45,4 +45,4 @@ The draft's author also authored historical audit and corpus research evidence;
 an independent planning reviewer must not count this author as a nonauthor.
 The current policy requires GPT-6 stock-harness implementation, same-candidate
 nonauthor GPT-6 plus native Fable5.1 medium planning review, and native Grok plus
-Fable result review. No Foreman or native review was invoked for this draft.
+Fable result review. No native review was invoked for this draft.

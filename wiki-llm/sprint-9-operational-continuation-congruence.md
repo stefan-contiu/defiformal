@@ -133,7 +133,7 @@ full Lean statements, axiom/private-name provenance, exact source/Git/tool/log
 bindings, nonempty runtime checks, 14 actual mutants, 65 controls and every prior
 regression. Independent planning approval precedes implementation; native Grok and
 Fable 5.1 at medium effort review substantive results and final evidence before accepted OpenSpec
-archive and user-authorized branch push with remote verification. No Foreman or
+archive and user-authorized branch push with remote verification. No
 merge to main.
 
 M2 interface/binding theory, new finite participants, parallel tree routing,

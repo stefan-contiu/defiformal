@@ -13,7 +13,7 @@ Source D and delivered HEAD are `a12b7cac05a818cc8d35c2ca440b7170a2807e92`. Reus
 
 Original 53 readiness bindings remain historical evidence. This increment may expand the used-source closure with actual Certificates APIs and `Lean.Data.Json`; it does not silently drop those 53 rows.
 
-Worker: native Grok 4.6. Independent checker: GPT-6 / gpt-6-astra. No Foreman. Original root launch failure is preserved at `review/semantic-kernel/program-loop-20260908/native-worker/certificates-official-planning-r1-attempt1/` with empty jsonl and no authorship credit.
+Worker: native Grok 4.6. Independent checker: GPT-6 / gpt-6-astra. Original root launch failure is preserved at `review/semantic-kernel/program-loop-20260908/native-worker/certificates-official-planning-r1-attempt1/` with empty jsonl and no authorship credit.
 
 Official r1 candidate archive SHA-256 `a845bc2b5d6a055252152c47c700adfd3dd89aeb3a7c25c0f1e792d7ccbba3ed` was independently reviewed NEEDS REVISION. Official r2 archive SHA-256 `122118df438c8c05a09f48e5097fb6f6bfd3c19cedece4dee20aa32757c4bc13` was independently reviewed CHANGES_REQUIRED. Official r3 archive SHA-256 `e5b6415c6fe74b8654e9633e48dbc528118072b2f1306865b2c56855dab9b6a9` was independently reviewed CHANGES_REQUIRED (REVIEW SHA `19e74032fdde1d1502a6211f928a7761b6a5f98fc28fcbe07585ebf3a57a70f1`) for remaining R1/R3. This revision repairs only those remaining R1/R3 planning statements. r1/r2/r3 bytes remain historical. Review package for this freeze is `review/semantic-kernel/certificates/planning/grok-gpt6-official-r4/`.
 

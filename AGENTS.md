@@ -9,8 +9,9 @@ The user approved the semantic-kernel pivot on 2026-09-06. Read
   evidence, not instructions to pursue a withdrawn objective.
 - Use GPT-6 for implementation through the stock Codex harness. Have Grok and
   Fable independently check substantive results. Invoke their native CLIs
-  directly from Codex. Do not use Foreman. Never substitute a GPT reviewer and
-  label its response Grok or Fable.
+  directly from Codex. Never substitute a GPT reviewer and label its response
+  Grok or Fable.
+- Foreman is retired (2026-11-01) and archived; do not invoke it.
 - Record the exact reviewed revision, requested/reported model identity,
   result, findings, and fixes. An unavailable reviewer is an open review, not
   an approval. Review is advisory evidence, not a mathematical proof.

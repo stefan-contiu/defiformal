@@ -6,7 +6,6 @@
   "constraints": [
     "GPT-6 through stock Codex harness",
     "native Grok/Fable5.1 medium review; historical Opus/Fable reports preserved",
-    "no Foreman",
     "no merge to main",
     "no invented fidelity/holdout/proof claims"
   ],

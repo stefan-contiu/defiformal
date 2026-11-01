@@ -59,7 +59,7 @@ The implementation SHALL capture all imported Interface theorem/supplemental dec
 
 ### Requirement: Dependency and independent acceptance gates
 
-The change SHALL require exact accepted Sprint9 source/evidence/delivery bindings and actual M1 API/control identity, followed by nonauthor GPT-6 and native Fable5.1 medium acceptance of the same frozen S10 plan before implementation. The accepted dependency is source eec499d, source/evidence ec9ed804 and archive/verified remote9908d9b, with full revisions in dependency-baseline.json. Stock GPT-6 implementation MUST then receive native Grok/Fable5.1-medium source/evidence review, requesting `claude-fable-5-1[1m]` with `--effort medium` and recording its actual returned model. No Foreman or independent approval, implementation or completed proof SHALL be inferred from author validation or a planning freeze.
+The change SHALL require exact accepted Sprint9 source/evidence/delivery bindings and actual M1 API/control identity, followed by nonauthor GPT-6 and native Fable5.1 medium acceptance of the same frozen S10 plan before implementation. The accepted dependency is source eec499d, source/evidence ec9ed804 and archive/verified remote9908d9b, with full revisions in dependency-baseline.json. Stock GPT-6 implementation MUST then receive native Grok/Fable5.1-medium source/evidence review, requesting `claude-fable-5-1[1m]` with `--effort medium` and recording its actual returned model. No independent approval, implementation or completed proof SHALL be inferred from author validation or a planning freeze.
 
 #### Scenario: RE11 Accepted dependency binding
 - **WHEN** accepted Sprint9 source/delivery/API evidence is missing or differs from the planning binding

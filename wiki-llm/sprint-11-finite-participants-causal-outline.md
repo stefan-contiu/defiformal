@@ -138,5 +138,5 @@ Retain every accepted predecessor CLI control, full imported proof/private-name
 inventory and honest source/tool/regression bindings. No sorry/custom axioms or
 native_decide. Stock GPT-6 implementation follows nonauthor GPT-6/native Opus plan
 acceptance; native Grok/Opus review results, requesting opus and recording returned
-model. No Foreman. M4 routing/group simulation, generic schedule independence,
+model. M4 routing/group simulation, generic schedule independence,
 active extensions, administration provenance and Atomic boundary laws stay open.

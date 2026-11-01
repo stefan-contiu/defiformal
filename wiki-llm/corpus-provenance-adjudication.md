@@ -52,5 +52,5 @@ The original author is stock GPT-6 and cannot serve as the nonauthor planning
 reviewer. The gate requires another stock GPT-6 reviewer and native Fable 5.1
 (`claude-fable-5-1[1m]`, medium effort) on identical frozen inputs. Implementation
 uses stock GPT-6, followed by native Grok/Fable substantive and evidence review.
-No Foreman is used. AFK authorization permits routine work, not acceptance or
+AFK authorization permits routine work, not acceptance or
 implementation while these gates remain open.

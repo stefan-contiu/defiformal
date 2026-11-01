@@ -54,7 +54,7 @@ Acceptance SHALL run all52 established defensive CLI control cases using Atomic 
 
 ### Requirement: Independent gated delivery
 
-Implementation SHALL begin only after independent GPT-6 and native Fable planning verdicts pass on the same frozen candidate. Acceptance SHALL require native Grok/Fable substantive implementation and evidence verdicts on exact inputs, resolution of blockers, truthful wiki/roadmap/task records, strict OpenSpec validation and a verified branch push/archive. Unavailable reviewers SHALL remain open and no Foreman SHALL be used.
+Implementation SHALL begin only after independent GPT-6 and native Fable planning verdicts pass on the same frozen candidate. Acceptance SHALL require native Grok/Fable substantive implementation and evidence verdicts on exact inputs, resolution of blockers, truthful wiki/roadmap/task records, strict OpenSpec validation and a verified branch push/archive. Unavailable reviewers SHALL remain open.
 
 #### Scenario: Same-candidate planning gate
 

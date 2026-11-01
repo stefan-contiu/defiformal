@@ -1,6 +1,6 @@
 # Reusable verification platform — sprint plan
 
-Planning only. Native Grok 4.6 author; independent GPT-6 checker. No Foreman. These files do not themselves execute sprints. Revision `planning-repair-r2-20260908` is pending independent GPT-6 review and does not set a review gate accepted. User authorization to execute after that acceptance is recorded separately at `review/semantic-kernel/program-execution-20260908/STATE.json`; do not re-ask. Frozen r1 archive `f4162b193aa0ad2b0884c93652cc6bb4507f443ee96318d96c687199f13f35a2` is not rewritten.
+Planning only. Native Grok 4.6 author; independent GPT-6 checker. These files do not themselves execute sprints. Revision `planning-repair-r2-20260908` is pending independent GPT-6 review and does not set a review gate accepted. User authorization to execute after that acceptance is recorded separately at `review/semantic-kernel/program-execution-20260908/STATE.json`; do not re-ask. Frozen r1 archive `f4162b193aa0ad2b0884c93652cc6bb4507f443ee96318d96c687199f13f35a2` is not rewritten.
 
 Canonical artifacts in this change: [design DAG](design.md), [tasks](tasks.md), [sprint-index](sprint-index.json), [coverage](coverage.md), [proof matrix](proof-obligation-dependency-matrix.json). Machine-readable fields live in `sprint-index.json`. Original OpenSpec task IDs remain the contracts for existing packages; `tasks.md` enumerates future work with `Pnn` in every task line.
 

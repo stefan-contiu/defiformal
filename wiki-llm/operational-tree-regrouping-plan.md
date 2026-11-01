@@ -72,4 +72,4 @@ claims rely on direct source inspection. Planning requires nonauthor stock GPT-6
 and native Fable5.1 medium on the same frozen bundle; substantive result review
 requires native Grok and Fable. Request `claude-fable-5-1[1m] --effort medium`,
 record the actual returned model, and keep missing/non-substantive verdicts open.
-No Foreman, kernel execution or provider invocation occurred in this author draft.
+No kernel execution or provider invocation occurred in this author draft.

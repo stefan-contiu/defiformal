@@ -14,7 +14,7 @@ not change the acceptance criteria.
   independently testable deliverable needs its own gate.
 - Use OpenSpec proposal/design/spec/tasks, author consistency checks, and separate
   GPT-6/native Fable planning reviews on the same frozen candidate. Execute after
-  the gate passes. Use GPT-6 through stock Codex, never Foreman.
+  the gate passes. Use GPT-6 through stock Codex.
 - Check substantive results with native Grok and Fable. Preserve their exact
   inputs, identities, findings and response artifacts. Unavailable review remains
   pending. It is not an approval.
@@ -108,7 +108,7 @@ A stored process handle is not proof that its process is still running.
 ## Current execution, 2026-09-08
 
 The user authorized the remaining FormalDeFi program with native Grok 4.6 as
-author and independent GPT-6 as checker. No Foreman. Publish accepted work to
+author and independent GPT-6 as checker. Publish accepted work to
 `semantic-kernel-pivot` only; do not merge to main.
 
 Sprint 10 is delivered. Checked integer arithmetic is delivered and archived at
