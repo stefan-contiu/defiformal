@@ -6,12 +6,12 @@ Produce the first composed financial example: two real components under one comp
 
 ### Requirement: Two financial components SHALL compose under one contract
 
-The sUSDS deposit and the token0 quote register SHALL be composed into one workflow under one `ComponentContract` instance whose preservation theorem invokes one named financial lemma shared by both components.
+Composition of the sUSDS deposit and the token0 quote register SHALL require an explicit, financially meaningful input/output relation and one `ComponentContract` instance whose preservation theorem invokes one named financial lemma shared by both components. Without that relation, only narrower library/interface reuse MAY be claimed and composition MUST remain open.
 
 #### Scenario: Composition is checked
 
 - **WHEN** the composed workflow module is built
-- **THEN** exactly one `ComponentContract` instance covers both components, one named lemma is invoked by both, dimension and refusal obligations are discharged, and the axiom audit reports no new trusted declaration
+- **THEN** exactly one `ComponentContract` instance covers both components, initialization and preservation of a named financial invariant are proved for the actual composed execution with each step's local guarantees discharged, one named lemma is invoked by both, dimension and refusal obligations are discharged, and the axiom audit reports no new trusted declaration
 
 #### Scenario: Reuse is measured
 

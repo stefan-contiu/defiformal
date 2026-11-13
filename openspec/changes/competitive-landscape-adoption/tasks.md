@@ -1,13 +1,13 @@
 # Competitive landscape adoption tasks (after independent planning review)
 
-All boxes stay unchecked in this planning freeze. Do not start Lean, CI configuration or adapter work until independent review accepts this slice. The 24 tasks are those of section 4.2 of the report, verbatim. Each line carries the task, then in brackets its kind (better product, trusted by others, better measurement) and what it serves (gap D1 to D5 and report sections), and ends with the report's completion criterion as the verify clause.
+All boxes stay unchecked in this planning freeze. Do not start Lean, CI configuration or adapter work until independent review accepts this slice. The 24 tasks follow section 4.2 of the report, with the project-specific prerequisites and acceptance conditions below. Each line carries the task, then in brackets its kind (better product, trusted by others, better measurement) and what it serves (gap D1 to D5 and report sections), and ends with its completion criterion as the verify clause.
 
 ## 1. Planning gate
 
 - [ ] 1.1 Obtain independent review of this exact `competitive-landscape-adoption` candidate under the reviewer bindings in `AGENTS.md`, record verdict, requested and reported model identity and input hashes, and verify no box in this file is ticked before acceptance.
-- [ ] 1.2 Decide whether the IOG Suite 1.0 and rational-1 adapters are contributed as a separate change, and verify tasks I.1, III.1, III.5 and III.6 are blocked, not skipped, until that decision is recorded.
+- [ ] 1.2 Decide whether the IOG Suite 1.0 and rational-1 adapters are contributed as a separate change. Verify every task using their adapters, proofs or helpers (including I.1, II.2, II.5, II.6, III.1, III.5 and III.6) stays blocked until its required pinned artifacts or specified replacements are available; a recorded contribution decision alone does not unblock it.
 
-## 2. Phase I: operational, no dependencies
+## 2. Phase I: operational
 
 - [ ] I.1 Add CI that runs the build, the axiom audit and the benchmark adapter on every commit, and fails on a lost case, a P3 or R3 replay growth above 1.1×, a benchmark clean build over 15 s, or a changed proof-module checksum. [better measurement; D5; 2.1, 2.3, 2.6, 2.8] Verify a passing run is visible at the current revision and the gate has been seen to fail on a deliberate break.
 - [ ] I.2 Cut a first tagged release, and add a contribution guide and a license file. [trusted by others; D5; 3.1] Verify a release date in the maintenance column; both files in the repository.
@@ -19,7 +19,7 @@ All boxes stay unchecked in this planning freeze. Do not start Lean, CI configur
 
 ## 3. Phase II: the first composed example
 
-- [ ] II.1 Compose the sUSDS deposit and the token0 quote register into one workflow under one `ComponentContract` that invokes one shared financial lemma; report the second instance's lines. [better product; D1] Verify one contract instance, one named lemma invoked by both, units and refusal checked, counts reported. (No tool has a supported unit-consistency or interface-compatibility cell, 1.2.)
+- [ ] II.1 Compose the sUSDS deposit and the token0 quote register into one workflow under one `ComponentContract` that invokes one shared financial lemma; report the second instance's lines. [better product; D1] Verify a meaningful financial input/output relation, invariant initialization and preservation from actual execution with each step's local guarantees discharged, one shared lemma, units, refusal and counts. Without that relation, record only narrower reuse and leave composition open. (No tool has a supported unit-consistency or interface-compatibility cell, 1.2.)
 - [ ] II.2 Extend the deposit correspondence from the fixed WAD case to the full domain, using the native-correspondence helper of the benchmark adapter as the template for per-operation arithmetic contracts. [better product; D2; 2.7] Verify a theorem over all admissible assets and rates, not one literal. (Every benchmark result in the field is on a new model, 2.8.)
 - [ ] II.3 Write the simulation relation between the pinned token0 Solidity campaign and the Lean library, and state the remaining obligation. [better product; D3] Verify three artifacts exist: model theorem, differential observations, refinement obligation.
 - [ ] II.4 State solvency, price-integrity and ordering obligations as separate theorems with explicit premises on the existing borrow and oracle guards. [better product; D4; 1.2] Verify lending solvency and price integrity cells in 1.2 move from partial to supported at a stated scope.

@@ -16,7 +16,7 @@ Three findings motivate this change:
   - D3, no stated relation between the Lean model and the pinned deployed code: quantified correspondence and source refinement are open;
   - D4, no adversary or environment model: schedules are inputs, there is no notion of permitted moves, capital, prices or inclusion;
   - D5, no evidence package re-checked by anyone outside the project: no CI, no release, no outside reproduction. Suite 1.0 now records independent leanchecker timings; outside reproduction remains open.
-- Phase I is operational and has no dependencies. Phase II produces the first composed financial example. Phase III measures it against the field. Phase IV widens the financial scope.
+- Phase I is operational. Phase II targets the first composed financial example subject to its financial connection and preservation requirements. Phase III measures it against the field. Phase IV widens the financial scope. Adapter-dependent tasks in every phase require the corresponding pinned artifacts or specified replacements to be available.
 - Record for every task its kind and what it serves, as the report does. The report ties tasks to the program at four points only (sprint P18 in I.4, sprint P27 in IV.3, and sprints P16 and P19 in the closing of gaps D3 and D5); any further sprint mapping is proposed in design.md and is this change's, not the report's. The frozen 37-sprint program, its sprint plan and `openspec/specs/` main specs are not edited.
 - Keep every planning gate open until independent review of these exact bytes. No task is ticked, no Lean, CI configuration or adapter code is included.
 
@@ -25,7 +25,7 @@ Three findings motivate this change:
 ### New Capabilities
 
 - `benchmark-regression-gate`: CI that runs the build, the axiom audit and the Suite 1.0 and rational-1 adapters on every commit and fails on a lost case, replay growth above 1.1×, a benchmark build over 15 s, or a changed proof-module checksum.
-- `composed-financial-workflow`: the sUSDS deposit and the token0 quote register under one `ComponentContract` that invokes one shared financial lemma, with units, linking obligations and refusal checked and the second instance's authored lines reported.
+- `composed-financial-workflow`: the sUSDS deposit and the token0 quote register under one `ComponentContract` with an explicit financial connection and initialization/preservation proved for actual execution, invoking one shared financial lemma, with units, refusal and the second instance's authored lines checked. Without that connection, only narrower reuse is claimed and composition remains open.
 - `arithmetic-correspondence-contracts`: per-operation correspondence between the executable Word-arithmetic operation and its exact-rational transition over the full domain, including rounding, fees and refusal.
 - `economic-obligations`: solvency, price-integrity and ordering obligations stated as separate theorems with explicit premises on the existing borrow and oracle guards.
 - `reproducible-evidence-package`: compiled proof modules shipped with checker name and version, trusted-import list, check scope and checksums; a documented pinned-cache setup timed from clone to passing replay; an outside reproduction on record.
@@ -37,4 +37,4 @@ None in `openspec/specs/`. Where a task extends an accepted capability (for exam
 
 ## Impact
 
-Planning files live under `openspec/changes/competitive-landscape-adoption/`. The report and its README live under `docs/research/competitive-landscape-2026-11/`. No existing file is modified. The measurement records behind the report are retained in IOG's assessment repository (`input-output-hk/SOTA-DeFiFormal-Moriarty`), which is private; `evidence-index.json` names them and the report embeds every number. The Suite 1.0 and rational-1 adapters used to measure DeFiFormal are IOG-authored and are not part of this change; tasks I.1, III.1, III.5 and III.6 require them, and their contribution is a separate decision for the repository owner.
+Planning files live under `openspec/changes/competitive-landscape-adoption/`. The report and its README live under `docs/research/competitive-landscape-2026-11/`. No existing file is modified. The measurement records behind the report are retained in IOG's assessment repository (`input-output-hk/SOTA-DeFiFormal-Moriarty`), which is private; `evidence-index.json` names them and the report embeds every number. The Suite 1.0 and rational-1 adapters used to measure DeFiFormal are IOG-authored and are not part of this change; all tasks using their adapters, proofs or helpers require the corresponding pinned artifacts or specified replacements to be available, and their contribution is a separate decision for the repository owner.

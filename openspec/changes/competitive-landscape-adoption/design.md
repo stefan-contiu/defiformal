@@ -23,7 +23,7 @@ Measurements cited here are of abstract benchmark models under the assessment's 
 
 ### 1. One change, four phases, rather than four changes
 
-The repository's active changes are sprint-sized slices. The 24 tasks are heterogeneous, so a single umbrella change keeps one review and one evidence index. Phases carry the ordering: I has no dependencies; II depends on nothing but produces the first composed example; III depends on II for its subject; IV depends on II and, for liquidation, on sprint P27. If the owner prefers, phase II can later be split into its own slice without changing this file.
+The repository's active changes are sprint-sized slices. The 24 tasks are heterogeneous, so a single umbrella change keeps one review and one evidence index. Phases carry the ordering: I is operational; II targets the first composed example subject to its financial connection and preservation requirements; III depends on II for its subject; IV depends on II and, for liquidation, on sprint P27. Adapter-dependent tasks in every phase also require the artifacts specified in task 1.2. If the owner prefers, phase II can later be split into its own slice without changing this file.
 
 **Rejected:** editing `sprint-plan.md` to add tasks. The program is frozen and earlier changes state they do not edit it.
 
@@ -61,7 +61,7 @@ The report's section 2.1 takeaway: replay time itself needs no task. 2.4 to 3.9 
 
 ## Risks / Trade-offs
 
-- The adapters are not in this repository. Phase I's gate (I.1) and phase III's measurement tasks cannot run until they are contributed or rewritten here.
+- The adapters are not in this repository. Every adapter-dependent task, including II.2, II.5 and II.6, remains blocked until its required pinned adapters, proofs and helpers, or specified replacements, are available.
 - Tasks I.4 and I.7 need a person outside the project and an assessment run outside this repository; they are the two tasks the implementation loop cannot complete alone.
 - The "on its own kernel library" claim for the seven rational-1 executor-level cases rests on the measurement records' origin field; tasks III.5 and III.7 make that claim re-checkable inside this repository.
 
